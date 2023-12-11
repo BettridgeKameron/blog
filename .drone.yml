@@ -19,7 +19,7 @@ steps:
     commands:
       - POD_NAME=$(microk8s.kubectl get pods -l app.kubernetes.io/instance=blog -o custom-columns=:metadata.name | tr -d '[:space:]')
       - if [ -z "$POD_NAME" ]; then echo "No pod found"; exit 1; fi
-      - echo "Pod Name: $POD_NAME"
+      - echo "$POD_NAME"
       - #microk8s.kubectl cp ./public $POD_NAME:/usr/share/nginx/html
       - #microk8s.kubectl exec $POD_NAME -- nginx -s reload
 
