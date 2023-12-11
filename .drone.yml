@@ -1,0 +1,30 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: build
+    image: ghcr.io/getzola/zola:v0.17.2
+    commands:
+      - zola build
+
+  - name: deploy
+    image: plugins/kubectl
+    settings:
+      kubernetes_server:
+        from_secret: kubernetes_server
+      kubernetes_cert:
+        from_secret: kubernetes_cert
+      kubernetes_token:
+        from_secret: kubernetes_token
+      script:
+        - POD_NAME=$(microk8s kubectl get pods -l app.kubernetes.io/instance=blog -o custom-columns=:metadata.name | tr -d '[:space:]')
+        - if [ -z "$POD_NAME" ]; then echo "No pod found"; exit 1; fi
+        - kubectl cp ./public $POD_NAME:/usr/share/nginx/html
+        - kubectl exec $POD_NAME -- nginx -s reload
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
