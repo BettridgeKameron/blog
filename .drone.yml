@@ -1,5 +1,4 @@
 kind: pipeline
-type: docker
 name: default
 
 steps:
@@ -9,7 +8,7 @@ steps:
       - zola build
 
   - name: deploy
-    image: plugins/kubectl
+    image: sinlead/drone-kubectl
     settings:
       kubernetes_server:
         from_secret: kubernetes_server
@@ -17,7 +16,7 @@ steps:
         from_secret: kubernetes_cert
       kubernetes_token:
         from_secret: kubernetes_token
-      script:
+      commands:
         - POD_NAME=$(microk8s kubectl get pods -l app.kubernetes.io/instance=blog -o custom-columns=:metadata.name | tr -d '[:space:]')
         - if [ -z "$POD_NAME" ]; then echo "No pod found"; exit 1; fi
         - kubectl cp ./public $POD_NAME:/usr/share/nginx/html
