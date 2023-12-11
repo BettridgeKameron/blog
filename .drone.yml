@@ -1,59 +1,22 @@
 kind: pipeline
+type: exec
 name: default
+
+platform:
+  os: linux
+  arch: amd64
 
 steps:
   - name: build
-    image: ghcr.io/getzola/zola:v0.17.2
     commands:
       - zola build
-    when:
-      event:
-        - push
-      branch:
-        - master
-
-  - name: prepare-deploy
-    image: alpine
-    commands:
-      - apk add --no-cache curl
-      - curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
-      - chmod +x ./kubectl
-      - mv ./kubectl /usr/local/bin
-    volumes:
-      - name: workspace
-        path: /drone/src
-    when:
-      event:
-        - push
-      branch:
-        - master
 
   - name: deploy
-    image: alpine
     commands:
-      - POD_NAME=$(kubectl get pods -l app.kubernetes.io/instance=blog -o custom-columns=:metadata.name | tr -d '[:space:]')
+      - POD_NAME=$(microk8s.kubectl get pods -l app.kubernetes.io/instance=blog -o custom-columns=:metadata.name | tr -d '[:space:]')
       - if [ -z "$POD_NAME" ]; then echo "No pod found"; exit 1; fi
-      - kubectl cp ./public $POD_NAME:/usr/share/nginx/html
-      - kubectl exec $POD_NAME -- nginx -s reload
-    environment:
-      KUBERNETES_SERVER:
-        from_secret: kubernetes_server
-      KUBERNETES_CERT:
-        from_secret: kubernetes_cert
-      KUBERNETES_TOKEN:
-        from_secret: kubernetes_token
-    volumes:
-      - name: workspace
-        path: /drone/src
-    when:
-      event:
-        - push
-      branch:
-        - master
-
-volumes:
-  - name: workspace
-    temp: {}
+      - microk8s.kubectl cp ./public $POD_NAME:/usr/share/nginx/html
+      - microk8s.kubectl exec $POD_NAME -- nginx -s reload
 
 trigger:
   branch:
