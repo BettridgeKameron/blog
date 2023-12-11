@@ -3,23 +3,57 @@ name: default
 
 steps:
   - name: build
-    image: 'ghcr.io/getzola/zola:v0.17.2'
+    image: ghcr.io/getzola/zola:v0.17.2
     commands:
       - zola build
+    when:
+      event:
+        - push
+      branch:
+        - master
+
+  - name: prepare-deploy
+    image: alpine
+    commands:
+      - apk add --no-cache curl
+      - curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+      - chmod +x ./kubectl
+      - mv ./kubectl /usr/local/bin
+    volumes:
+      - name: workspace
+        path: /drone/src
+    when:
+      event:
+        - push
+      branch:
+        - master
+
   - name: deploy
-    image: sinlead/drone-kubectl
-    settings:
-      kubernetes_server:
+    image: alpine
+    commands:
+      - POD_NAME=$(kubectl get pods -l app.kubernetes.io/instance=blog -o custom-columns=:metadata.name | tr -d '[:space:]')
+      - if [ -z "$POD_NAME" ]; then echo "No pod found"; exit 1; fi
+      - kubectl cp ./public $POD_NAME:/usr/share/nginx/html
+      - kubectl exec $POD_NAME -- nginx -s reload
+    environment:
+      KUBERNETES_SERVER:
         from_secret: kubernetes_server
-      kubernetes_cert:
+      KUBERNETES_CERT:
         from_secret: kubernetes_cert
-      kubernetes_token:
+      KUBERNETES_TOKEN:
         from_secret: kubernetes_token
-      commands:
-        - POD_NAME=$(kubectl get pods -l app.kubernetes.io/instance=blog -o custom-columns=:metadata.name | tr -d '[:space:]')
-        - 'if [ -z "$POD_NAME" ]; then echo "No pod found"; exit 1; fi'
-        - 'kubectl cp ./public $POD_NAME:/usr/share/nginx/html'
-        - kubectl exec $POD_NAME -- nginx -s reload
+    volumes:
+      - name: workspace
+        path: /drone/src
+    when:
+      event:
+        - push
+      branch:
+        - master
+
+volumes:
+  - name: workspace
+    temp: {}
 
 trigger:
   branch:
