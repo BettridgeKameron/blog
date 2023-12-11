@@ -10,3 +10,5 @@ If you see this, then my blog is working :D. Sadly, there isn't much yet, but it
 <!-- more -->
 
 Even clicking more, there isn't much here unfortunately.
+
+However, if your seeing this, that means that I finally got the CICD to work to!
