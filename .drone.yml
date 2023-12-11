@@ -16,9 +16,7 @@ steps:
       kubernetes_token:
         from_secret: kubernetes_token
       commands:
-        - >-
-          POD_NAME=$(kubectl get pods -l app.kubernetes.io/instance=blog -o
-          custom-columns=:metadata.name | tr -d '[:space:]')
+        - POD_NAME=$(kubectl get pods -l app.kubernetes.io/instance=blog -o custom-columns=:metadata.name | tr -d '[:space:]')
         - 'if [ -z "$POD_NAME" ]; then echo "No pod found"; exit 1; fi'
         - 'kubectl cp ./public $POD_NAME:/usr/share/nginx/html'
         - kubectl exec $POD_NAME -- nginx -s reload
