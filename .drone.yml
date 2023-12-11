@@ -9,6 +9,7 @@ platform:
 steps:
   - name: build
     commands:
+      - whoami
       - zola build
 
   - name: deploy
