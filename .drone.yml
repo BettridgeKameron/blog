@@ -10,6 +10,8 @@ steps:
   - name: build
     commands:
       - whoami
+      - pwd
+      - ls
       - zola build
 
   - name: deploy
