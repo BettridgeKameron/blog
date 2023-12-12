@@ -10,7 +10,7 @@ An overengineered security blog!
 
 ## About
 
-Minty Blog is an overengineered security blog powered by Gitea and DroneCI. It is hosted on microk8s, utilizing a Continuous Integration and Continuous Deployment (CICD) pipeline with DroneCI. I have also implemented a Mail server with Mailu, which has working [webmail](https://roundcube.net/), and properly configured DMARC, DKIM, and SPF.
+Minty Blog is an overengineered security blog powered by Gitea and DroneCI. It is hosted on microk8s, utilizing a Continuous Integration and Continuous Deployment (CICD) pipeline with DroneCI. I have also implemented a Mail server with Mailu, which has working [webmail](https://roundcube.net/), and properly configured DMARC, DKIM, and SPF. All hosted on a 4GB Server on Linode.
 
 ## Technologies Used
 
