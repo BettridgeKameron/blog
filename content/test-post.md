@@ -16,3 +16,18 @@ However, if your seeing this, that means that I finally got the CICD to work too
 {{ figure(src="/img/test.png", caption="Here is a test caption for my test image of me testing.") }}
 
 Will be creating my first actual blog post soon though. As for now I think I may also add a step in my Drone pipeline that uses exiftool to remove all metadata from files in my static/img folder.
+
+```py
+def test(number: int) -> None:
+    """
+    Test function to test syntax highlighting (I should change the theme for it)
+
+    :param number: An integer number to be included in the test statement.
+    :type number: int
+    :rtype: None
+    """
+    print(f"Testing, with some number: {number}.")
+
+for x in range(20):
+    test(x)
+```
