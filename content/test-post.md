@@ -7,6 +7,8 @@ tags = ["test", "misc"]
 +++
 
 If you see this, then my blog is working :D. Sadly, there isn't much yet, but it's a start!
+
+If you click read more though, maybe there will be more...
 <!-- more -->
 
 Even clicking more, there isn't much here unfortunately.
@@ -33,3 +35,5 @@ for x in range(20):
 ```
 
 Will also probably make a post on how I managed to make the blog, mail server, gitea, ci, etc, mostly as documentation for myself because I have just spent a few days recovering from a technical disaster (oops, but as you are reading this, I fixed it!).
+
+Update again, I have refactored the yaml files to be more accurate. Hopefully I can make it follow best practices and get it to be at a place where im comfortable with releasing it.
