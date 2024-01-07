@@ -32,4 +32,4 @@ for x in range(20):
     test(x)
 ```
 
-Will also probably make a post on how I managed to make the blog, mail server, gitea, ci, etc, mostly as documentation for myself because i just spent a few days recovering from a technical disaster (oops).
+Will also probably make a post on how I managed to make the blog, mail server, gitea, ci, etc, mostly as documentation for myself because I have just spent a few days recovering from a technical disaster (oops).
