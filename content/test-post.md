@@ -26,7 +26,7 @@ def test(number: int) -> None:
     :type number: int
     :rtype: None
     """
-    print(f"Testing, with some number: {number}.")
+    print(f"Testing, with some number: {number}.") # This prints out some words
 
 for x in range(20):
     test(x)
