@@ -38,4 +38,4 @@ Will also probably make a post on how I managed to make the blog, mail server, g
 
 Update again, I have refactored the yaml files to be more accurate. Hopefully I can make it follow best practices and get it to be at a place where im comfortable with releasing it.
 
-Another update, because I broke the server again. But now it is fixed!
+Another update, because I broke the server again. But now it is fixed! Hopefully don't have an issue again.
