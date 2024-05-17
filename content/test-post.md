@@ -1,5 +1,5 @@
 +++
-title = "Test post"
+title = "Test Post"
 date = 2023-12-10
 
 [taxonomies]
