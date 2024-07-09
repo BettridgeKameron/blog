@@ -8,7 +8,7 @@ tags = ["write-up", "ctf", "uscg", "web exploitation"]
 
 US Cyber Games Season IV Open was a very fun CTF, with some cool challenges, where I ended up placing 6th overall, getting me into the Combine! I have made two writeups for web challenges, mostly for the Combine.
 <!-- more -->
-
+---
 # Ding-O-Tron
 {{ figure(src="/img/uscg24-web-writeups/ding_home.png", caption="Ding-O-Tron Home page") }}
 ## Challenge Description
@@ -40,6 +40,6 @@ calling this will get us the flag!
 
 ## Final Thoughts
 This was a nice challenge that allowed me to get some easy points. I am glad I didn't need to reverse engineer the wasm or it may have taken a lot more time. Since I saw some people solve it in under 5 minutes, I should have taken that as a hint that it was much easier than I thought, but that didn't matter at the end of the day.
-
+---
 # Secure File Storage
 Work-In-Progress
