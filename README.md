@@ -1,6 +1,6 @@
 # Minty Blog
 
-An overengineered security blog!
+An over-engineered security blog!
 
 [![Build Status](https://ci.mintydev.gay/api/badges/clovis/blog/status.svg)](https://ci.mintydev.gay/clovis/blog)
 
