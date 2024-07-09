@@ -40,6 +40,7 @@ calling this will get us the flag!
 
 ## Final Thoughts
 This was a nice challenge that allowed me to get some easy points. I am glad I didn't need to reverse engineer the wasm or it may have taken a lot more time. Since I saw some people solve it in under 5 minutes, I should have taken that as a hint that it was much easier than I thought, but that didn't matter at the end of the day.
+
 ---
 # Secure File Storage
 Work-In-Progress
