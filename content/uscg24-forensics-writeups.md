@@ -1,13 +1,13 @@
 +++
 title = "USCG Season IV Forensics Write-Ups"
-date = 2024-07-04
+date = 2024-08-02
 
 [taxonomies]
-tags = ["write-up", "ctf", "uscg", "Forensics"]
+tags = ["write-up", "ctf", "uscg", "forensics"]
 +++
 
 (WIP)
-US Cyber Games Season IV Open was a very fun CTF, with some cool challenges, where I ended up placing 6th overall, getting me into the Combine! I have made two writeups for web challenges, mostly for the Combine.
+For the USCG Combine, this weeks focus was forensics! Here are some writeups for the challenges that were given for the combine.
 <!-- more -->
 ---
 # Ding-O-Tron
