@@ -11,7 +11,6 @@ For the USCG Combine, this weeks focus was forensics! Here are some writeups for
 <!-- more -->
 ---
 # Ding-O-Tron
-{{ figure(src="/img/uscg24-web-writeups/ding_home.png", caption="Ding-O-Tron Home page") }}
 ## Challenge Description
 Ding-O-Tron's website is fairly simple, with a png of a bell, a counter, and a claim that if you get over 9000 dings, there will be a reward (the flag).
 
