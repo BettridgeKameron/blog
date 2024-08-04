@@ -76,7 +76,11 @@ When looking through the code further, we can see that path traversal is possibl
 ```py
 return send_file(os.path.join(file["filepath"],file["filename"]), as_attachment=True, download_name=file["filename"])
 ```
-Essentially if filepath is `/app/uploads/clovis/` and we can control filename, we could set it to be `../../../flag.txt` so it becomes `/app/uploads/clovis/../../../flag.txt` which becomes `/flag.txt`. This is great and all, but there is an issue: in the `download_file` function in api.py, we don't directly control the filename, and its gotten from the database from the code:
+Essentially if filepath is `/app/uploads/clovis/` and we can control filename, we could set it to be `../../../flag.txt` so it becomes
+```
+/app/uploads/clovis/../../../flag.txt
+```
+which actually is just equal to `/flag.txt`. This is great and all, but there is an issue: in the `download_file` function in api.py, we don't directly control the filename, and its gotten from the database from the code:
 ```py
 file = fetch_file_db(user["id"],file_id)
 ```
@@ -209,7 +213,10 @@ modified_message_base64 = base64.b64encode(modified_message)
 
 print(f"Modified encrypted message: {modified_message_base64.decode()}")
 ```
-running this will return the ciphertext `pR0n2M2YtJw4m+MZmQaQGLyx9YhO7wLg+pHkxQ0nv4z8qetKEM1BIJTDXyvzWnp4`
+running this will return the ciphertext 
+```
+pR0n2M2YtJw4m+MZmQaQGLyx9YhO7wLg+pHkxQ0nv4z8qetKEM1BIJTDXyvzWnp4
+```
 
 Since it will be put in the url, it will be less lenient on chars (since there are reserved chars in the url), so we will want to URLEncode the request, which I used [CyberChef](https://gchq.github.io/CyberChef/).
 {{ figure(src="/img/uscg24-web-writeups/sfs_theoretical-sqli-urlencode-cyberchef.png", caption="Note how we are now providing the literal ciphertext that we made with the bitflip script.") }}

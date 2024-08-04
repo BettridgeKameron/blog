@@ -42,7 +42,7 @@ TF.extractall(filepath)
 ```
 which when checking the Python docs for `TarFile.extractall` ([found here](https://docs.python.org/3/library/tarfile.html#tarfile.TarFile.extractall)), it notes that untrusted archives should not be extracted unless inspected. This is due to something known as a zip slip/tar slip vulnerability, which allows for the inclusion of arbitrary files using symlinks.
 
-Tar slip works since for tar files, we can actually include a symlink. So we could put a symlink `config.py` that links to `/app/application/config.py`, and include this in the tar file. This way, when the file is extracted by the server, it will actually stay a symlink on the server, so if someone access `/app/assets/firmware_updates/<random hex>/config.py`, it will actually access `/app/application/config.py`, since its a symlink!
+Tar slip works since for tar files, we can actually include a symlink. So we could put a symlink `config.py` that links to `/app/application/config.py`, and include this in the tar file. This way, when the file is extracted by the server, it will actually stay a symlink on the server, so if someone access `/app/assets/firmware_updates/< random hex >/config.py`, it will actually access `/app/application/config.py`, since its a symlink!
 
 The same vulnerability that allows us to access the private key, can be used to access the symlink since it is also in the public assets folder.
 
@@ -99,9 +99,9 @@ if __name__ == "__main__":
 ```
 
 After creating the malicious firmware, you can now upload it, keeping note of the path it extracted to.
-{{ figure(src="/img/uscg24-web-week1/firmware-path.png", caption="The files in the tar (i.e. the symlink) are extracted to '/assets/firmware_updates/e5d104f5cab84c77e6ca52a23dd888d8', which is again, public.") }}
+{{ figure(src="/img/uscg24-web-week1/firmware-path.png", caption="The files in the tar (i.e. the symlink) are extracted to '/assets/firmware_updates/< ... >', which is again, public.") }}
 
-We can now simply go to `/assets/firmware_updates/e5d104f5cab84c77e6ca52a23dd888d8/config.py` and download it! Since it's a symlink, it will download the linked file instead, which is the servers config.py
+We can now simply go to `/assets/firmware_updates/< ... >/config.py` and download it! Since it's a symlink, it will download the linked file instead, which is the servers config.py
 {{ figure(src="/img/uscg24-web-week1/leaked-config.png", caption="Leaking the file was successful! Cropped flag since the challenge is still active as of writing.") }}
 
 ## Final Thoughts
