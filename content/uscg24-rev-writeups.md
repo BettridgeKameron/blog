@@ -48,7 +48,7 @@ Using a program like pwndbg, we can skip over to the initial `jump` function and
 
 Examining the memory at the base pointer, we can see a very interesting and long mostly zeroed out section, starting at `0x7fffffffd5b0`. In C/C++, arrays are initialized to contain all 0s until they have values assigned. While this is not definitive proof that its the map, we can try to look into it even further!
 
-{{ figure(src="/img/uscg24-rev-writeups/2_Possible_Map.png", caption="This being a fairly large array, matches up with the size the board should be.") }}
+{{ figure(src="/img/uscg24-rev-writeups/3_Possible_Map.png", caption="This being a fairly large array, matches up with the size the board should be.") }}
 
 Assuming the first double word is index 0, if we convert hex to decimal, we can get for the first few mappings:
 ```
