@@ -8,7 +8,7 @@ tags = ["write-up", "ctf", "uscg", "rev"]
 
 For the USCG Combine, this weeks focus was rev! Here are some writeups for the challenges that were given for the combine.
 <!-- more -->
-
+---
 # StarTrek 1
 {{ figure(src="/img/uscg24-rev-writeups/0.0_running_program.png", caption="This is what we are greeted with when first starting the program.") }}
 ## Challenge Description
